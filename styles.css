@@ -1,0 +1,164 @@
+body {
+    font-family: Arial, sans-serif;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Yatay scroll bar'ı gizler */
+}
+
+.video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.video-container video {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: brightness(0.5); /* Video parlaklığını ayarlamak için */
+}
+
+header {
+    background-color: rgba(0, 122, 255, 0.8); /* Transparan arka plan */
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    animation: fadeInDown 2s ease-in-out;
+}
+
+.logo {
+    height: 50px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav li {
+    margin-left: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 200px;
+    background-color: rgba(0, 122, 255, 0.8); /* Transparan arka plan */
+    padding-top: 60px;
+    z-index: 1;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 15px 20px;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+}
+
+main {
+    margin-left: 200px; /* Sol menü genişliği kadar boşluk bırak */
+    padding: 20px;
+    z-index: 1;
+    position: relative;
+    overflow-x: hidden; /* Yatay scroll bar'ı gizler */
+}
+
+section {
+    margin-bottom: 40px;
+    padding-bottom: 40px; /* İçerikler arası boşluk bırakır */
+}
+
+footer {
+    background-color: rgba(51, 51, 51, 0.8); /* Transparan arka plan */
+    text-align: center;
+    padding: 10px 0;
+    animation: fadeInUp 2s ease-in-out;
+    z-index: 1;
+    position: relative;
+}
+
+.highlight {
+    background-color: rgba(51, 51, 51, 0.8); /* Transparan arka plan */
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    animation: fadeIn 2s ease-in-out;
+    z-index: 1;
+    position: relative;
+}
+
+.cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; /* Küçük ekranlarda kartları sarma */
+    justify-content: space-between; /* Kartlar arası boşluk */
+}
+
+.card {
+    background-color: rgba(85, 85, 85, 0.8); /* Transparan arka plan */
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1;
+    animation: slideIn 1.5s ease-in-out;
+    z-index: 1;
+    position: relative;
+}
+
+.service, .project, .contact {
+    background-color: rgba(85, 85, 85, 0.8); /* Transparan arka plan */
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    animation: fadeIn 1.5s ease-in-out;
+    z-index: 1;
+    position: relative;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes fadeInDown {
+    from { transform: translateY(-50%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { transform: translateY(50%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
