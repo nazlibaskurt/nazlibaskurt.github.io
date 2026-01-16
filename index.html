@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#ff6b6b" />
+  <title>İyi ki Doğdun ❤️</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f0f14;          /* arka plan */
+      --paper:#14141a;       /* kart rengi */
+      --soft:#1b1b23;        /* daha koyu yüzey */
+      --text:#f3f4f6;        /* ana metin */
+      --muted:#c7c9d1;       /* ikincil metin */
+      --primary:#ff6b6b;     /* vurgu */
+      --accent:#ffd166;      /* ikinci vurgu */
+      --ring:rgba(255,107,107,.5);
+      --glass:rgba(255,255,255,.06);
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;scroll-behavior:smooth}
+    body{font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu; color:var(--text); background:radial-gradient(1200px 800px at 80% -10%, rgba(255,107,107,.25), transparent 60%), radial-gradient(800px 600px at -10% 110%, rgba(255,209,102,.18), transparent 55%), var(--bg);}    
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Navbar */
+    .nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(140%) blur(8px);background:linear-gradient(0deg, transparent, rgba(15,15,20,.75));}
+    .nav-inner{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:14px 18px}
+    .brand{font-family:"Dancing Script";font-size:28px;color:var(--accent)}
+    .links{display:flex;gap:16px;flex-wrap:wrap}
+    .chip{padding:10px 14px;border-radius:999px;background:var(--glass);border:1px solid rgba(255,255,255,.08)}
+    .chip:hover{box-shadow:0 0 0 3px var(--ring)}
+
+    /* Hero */
+    .hero{position:relative;overflow:hidden}
+    .hero-inner{max-width:1100px;margin:auto;display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:center;padding:72px 18px 36px}
+    .tag{display:inline-block;padding:8px 12px;border:1px solid rgba(255,255,255,.12);border-radius:999px;background:var(--glass);color:var(--muted);font-size:12px;letter-spacing:.3px}
+    .title{font-size:52px;line-height:1.05;margin:16px 0 10px;font-weight:700}
+    .title span{color:var(--primary);font-family:"Dancing Script";font-weight:700;font-size:.9em}
+    .subtitle{color:var(--muted);max-width:48ch}
+    .cta-row{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+    .btn{padding:14px 18px;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));box-shadow:var(--shadow)}
+    .btn.primary{background:linear-gradient(180deg, rgba(255,107,107,.9), rgba(255,107,107,.7));border-color:rgba(255,107,107,.8)}
+    .btn:hover{transform:translateY(-1px)}
+
+    .polaroid{position:relative;border-radius:18px;overflow:hidden;background:var(--paper);border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow)}
+    .polaroid img{aspect-ratio:4/5;object-fit:cover}
+    .polaroid .cap{padding:14px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* Hearts animation */
+    .hearts{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+    .heart{position:absolute;bottom:-40px;width:18px;height:18px;background:var(--primary);transform:rotate(45deg);animation:float 12s linear infinite;opacity:.5}
+    .heart::before,.heart::after{content:"";position:absolute;width:18px;height:18px;background:var(--primary);border-radius:50%}
+    .heart::before{left:-9px}
+    .heart::after{top:-9px}
+    @keyframes float{0%{transform:translateY(0) rotate(45deg)}100%{transform:translateY(-120vh) rotate(45deg)}}
+    /* farklı hız/konum için özelleştirme */
+    .heart.h1{left:10%;animation-duration:13s;animation-delay:0s}
+    .heart.h2{left:22%;animation-duration:10s;animation-delay:1s}
+    .heart.h3{left:35%;animation-duration:15s;animation-delay:2s}
+    .heart.h4{left:48%;animation-duration:12s;animation-delay:3s}
+    .heart.h5{left:63%;animation-duration:16s;animation-delay:1.5s}
+    .heart.h6{left:78%;animation-duration:11s;animation-delay:2.5s}
+    .heart.h7{left:90%;animation-duration:14s;animation-delay:.5s}
+
+    /* Sections */
+    section{padding:56px 18px}
+    .wrap{max-width:1100px;margin:auto}
+    .h2{font-size:32px;margin:0 0 16px;font-weight:700}
+    .lead{color:var(--muted);max-width:60ch}
+
+    /* Timeline */
+    .timeline{display:grid;gap:16px;margin-top:20px}
+    .t-item{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:start;padding:18px;border-radius:var(--radius);background:var(--paper);border:1px solid rgba(255,255,255,.08)}
+    .t-date{color:var(--accent);font-weight:600}
+    .t-text{color:var(--muted)}
+
+    /* Memory cards */
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+    .card{background:var(--paper);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);overflow:hidden;transition:transform .2s ease;box-shadow:var(--shadow)}
+    .card:hover{transform:translateY(-3px)}
+    .card img{aspect-ratio:4/3;object-fit:cover}
+    .card .p{padding:14px;color:var(--muted)}
+
+    /* Gallery with :target modal */
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+    .grid a{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+    .grid img{aspect-ratio:1;object-fit:cover;filter:saturate(1.05)}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;padding:20px}
+    .modal img{max-width:min(92vw,1100px);max-height:86vh;border-radius:16px}
+    .modal:target{display:flex}
+    .close{position:fixed;top:22px;right:22px;background:var(--glass);border:1px solid rgba(255,255,255,.12);padding:10px 14px;border-radius:999px}
+
+    /* Letter */
+    .letter{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:20px}
+    .script{font-family:"Dancing Script";font-size:28px;color:var(--primary)}
+    .just{ text-align:justify; color:var(--muted)}
+
+    /* Reasons */
+    .reasons{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
+    .reason{background:var(--paper);border:1px solid rgba(255,255,255,.08);padding:14px;border-radius:16px;color:var(--muted)}
+
+    /* Surprise reveal */
+    .reveal{margin-top:18px;background:var(--paper);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:18px}
+    .switch{appearance:none;width:52px;height:30px;border-radius:999px;background:#333;position:relative;cursor:pointer;outline:none;border:1px solid rgba(255,255,255,.12)}
+    .switch::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:all .25s}
+    .switch:checked{background:var(--primary)}
+    .switch:checked::after{left:25px}
+    .gift{display:none;margin-top:12px;padding:14px;border-radius:14px;background:linear-gradient(90deg, rgba(255,107,107,.2), rgba(255,209,102,.2));border:1px solid rgba(255,255,255,.12)}
+    .switch:checked ~ .gift{display:block}
+
+    /* Footer */
+    footer{padding:26px 18px;border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero-inner{grid-template-columns:1fr}
+      .cards{grid-template-columns:1fr 1fr}
+      .grid{grid-template-columns:repeat(3,1fr)}
+      .t-item{grid-template-columns:1fr}
+    }
+    @media (max-width:640px){
+      .title{font-size:38px}
+      .cards{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .reasons{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">İyi ki doğdun, <span style="color:var(--primary)">Deniz Gözlüm</span> ✨</div>
+      <div class="links">
+        <a class="chip" href="#hikaye">Hikayemiz</a>
+        <a class="chip" href="#anilar">Anı Kartları</a>
+        <a class="chip" href="#galeri">Galeri</a>
+        <a class="chip" href="#mektup">Mektup</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-inner wrap">
+      <div>
+        <span class="tag">01.01.2024 — 2. yıl 💫</span>
+        <h1 class="title">Bu site, yeni yaşında da sana verebileceğim en güzel hediye olan<span> bizim hikâyemiz</span> için. <br/>İyi ki doğdun hayatımın anlamı, iyi ki benimsin.</h1>
+        <p class="subtitle">Aşağıda ilk fotoğrafımızdan en çok güldüğümüz ana kadar küçük bir zaman kapsülü hazırladım. Hepsi senin için. 🎁</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#hikaye">Hikayemize Git</a>
+          <a class="btn" href="#galeri">Fotoğraflara Bak</a>
+        </div>
+      </div>
+      <div class="polaroid">
+        <!-- KAPAĞA KOYMAK İSTEDİĞİN FOTOĞRAFI /images/kapak.jpg OLARAK EKLE -->
+        <img src="images/kapak.jpg" alt="Kapak fotoğrafımız" />
+        <div class="cap">“Bu kare her şeyi anlatıyor.”</div>
+      </div>
+    </div>
+    <!-- kalp animasyonu -->
+    <div class="hearts" aria-hidden="true">
+      <div class="heart h1"></div>
+      <div class="heart h2"></div>
+      <div class="heart h3"></div>
+      <div class="heart h4"></div>
+      <div class="heart h5"></div>
+      <div class="heart h6"></div>
+      <div class="heart h7"></div>
+    </div>
+  </header>
+
+  <!-- HİKAYE / ZAMAN ÇİZELGESİ -->
+  <section id="hikaye">
+    <div class="wrap">
+      <h2 class="h2">Hikayemiz</h2>
+      <p class="lead">İlk mesaj, ilk uzak kalışımızdan sonra kavuşmamız, ilk seyahat… İşte dönüp bakınca “iyi ki” dediğimiz anlar. 💞</p>
+      <div class="timeline">
+        <!-- TARİHLERİ KENDİ İLİŞKİNİZE GÖRE DÜZENLEYİN -->
+        <div class="t-item">
+          <div class="t-date">14 Aralık 2023</div>
+          <div class="t-text">Beni ilk defa arayıp sonra da "Nazlı hanım oygursa gitmeyi düşünür müsünüz" yazdığın gün...</div>
+        </div>
+        <div class="t-item">
+          <div class="t-date">15 Eylül 2024</div>
+          <div class="t-text">Yurtdışından döndüğün ve ikinci sınıfa başladığımız zaman. İlk kez o kadar uzun süre ayrı kalmıştık ve tam 4704km...</div>
+        </div>
+        <div class="t-item">
+          <div class="t-date">28 Şubat-1 Mart 2025</div>
+          <div class="t-text">Beraber gittiğimiz ilk konser ve ertesi gün çıktığımız ilk tren yolculuğumuz, Kütahya...</div>
+        </div>
+         <div class="t-item">
+          <div class="t-date">16 Mayıs 2025</div>
+          <div class="t-text">Rezalet kötü İstanbul gezimiz, sen olduğun için en güzel günlerden biriydi...</div>
+        </div>
+         
+         <div class="t-item">
+          <div class="t-date">24 Mayıs 2025</div>
+          <div class="t-text">Birlikte geçirdiğimiz en önemli gün, mezuniyetimiz; yeni hayatımızın başlangıcı...</div>
+        </div>
+        <div class="t-item">
+          <div class="t-date">Yaz 2025</div>
+          <div class="t-text">İlk küçük deniz tatili. Birlikte denizde "dalga gelince zıpla" oynayışımız unutulmamalı...</div>
+        </div>
+        <div class="t-item">
+          <div class="t-date">2024 ve 2025</div>
+          <div class="t-text">Birlikte büyüdüğümüz, zor günleri el ele atlattığımız anı dolu yıllar.</div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <label style="display:flex;align-items:center;gap:10px">
+          <input class="switch" type="checkbox" />
+          <span>Duygusal sürprizi aç 🎁</span>
+        
+        <div class="gift">
+          “Her yeni yaşında dileğim aynı: Gözlerinin içine baktığımda, evimde olduğumu hissetmek.”
+        </div>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANILAR (KARTLAR) -->
+  <section id="anilar">
+    <div class="wrap">
+      <h2 class="h2">Anı Kartları</h2>
+      <p class="lead">Her kart, bir tebessüm sebebi.</p>
+      <div class="cards">
+        <!-- Görselleri /images klasörüne koy, aşağıdaki yolları değiştir -->
+        <article class="card">
+          <img src="images/ani-1.jpg" alt="İlk fotoğraf" />
+          <div class="p"><strong>İlk fotoğraf</strong> — Birbirimize gıcık oluşumuz...</div>
+        </article>
+        <article class="card">
+          <img src="images/ani-2.jpg" alt="Doğum günü sürprizi" />
+          <div class="p"><strong>Doğum günü</strong> — Mumları üflerken dilediğim dilek: Hep sen. 🎂</div>
+        </article>
+        <article class="card">
+          <img src="images/ani-3.jpg" alt="Küçük bir yolculuk" />
+          <div class="p"><strong>Mini kaçamak</strong> — Denizin manzarası, arka fonda kahkahaların.🥹❤️</div>
+        </article>
+        <article class="card">
+          <img src="images/ani-4.jpg" alt="İlk Seyahatimiz" />
+          <div class="p"><strong>Kütahya</strong> — Çıkana kadar nefes nefese kalmıştık ama seninle bir an ömre bedel olduğu için her şeye değer.</div>
+        </article>
+        <article class="card">
+          <img src="images/ani-5.jpg" alt="Ankara" />
+          <div class="p"><strong>Ankara</strong> — Atamızın huzuruna el ele gittiğimiz gün...</div>
+        </article>
+        <article class="card">
+          <img src="images/ani-6.jpg" alt="Eskişehir" />
+          <div class="p"><strong>Eskişehir </strong> — Bizim şehrimiz... Her köşesi anılarımızla dolu.❤️</div>
+        </article>
+        <article class="card">
+          <img src="images/ani-7.jpg" alt="doğum günün" />
+          <div class="p"><strong>Yaş günün </strong> — Benim olmak için dünyaya gelişinin 19. yıldönümü.❤️</div>
+        </article>
+        <article class="card">
+          <img src="images/ani-8.jpg" alt="Yıldönümü" />
+          <div class="p"><strong>Yıldönümümüz </strong> — Dünyanın en mutlu günü.</div>
+        </article>
+        <article class="card">
+          <img src="images/ani-9.jpg" alt="Aşk" />
+          <div class="p"><strong>En Özel Günümüz</strong> — Beraber gençliğimizin en güzel 2 yılını bitirip mezun olduğumuz gün.</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERİ (BÜYÜTME :target) -->
+  <section id="galeri">
+    <div class="wrap">
+      <h2 class="h2">Anlatmakla Bitiremeyeceğim Anı Galerisi</h2>
+      <p class="lead">Karelerin üstüne tıkla, bizi daha yakından görmek istersen...</p>
+      <div class="grid">
+        <a href="#g1"><img src="images/g-1.jpg" alt="galeri 1"></a>
+        <a href="#g2"><img src="images/g-2.jpg" alt="galeri 2"></a>
+        <a href="#g3"><img src="images/g-3.jpg" alt="galeri 3"></a>
+        <a href="#g4"><img src="images/g-4.jpg" alt="galeri 4"></a>
+        <a href="#g5"><img src="images/g-5.jpg" alt="galeri 5"></a>
+        <a href="#g6"><img src="images/g-6.jpg" alt="galeri 6"></a>
+        <a href="#g7"><img src="images/g-7.jpg" alt="galeri 7"></a>
+        <a href="#g8"><img src="images/g-8.jpg" alt="galeri 8"></a>
+        <a href="#g9"><img src="images/g-9.jpg" alt="galeri 9"></a>
+        <a href="#g10"><img src="images/g-10.jpg" alt="galeri 10"></a>
+        <a href="#g11"><img src="images/g-11.jpg" alt="galeri 11"></a>
+        <a href="#g12"><img src="images/g-12.jpg" alt="galeri 12"></a>
+      </div>
+
+      <!-- modals -->
+      <div id="g1" class="modal"><a class="close" href="#galeri">Kapat ✕</a><img src="images/g-1.jpg" alt=""></div>
+      <div id="g2" class="modal"><a class="close" href="#galeri">Kapat ✕</a><img src="images/g-2.jpg" alt=""></div>
+      <div id="g3" class="modal"><a class="close" href="#galeri">Kapat ✕</a><img src="images/g-3.jpg" alt=""></div>
+      <div id="g4" class="modal"><a class="close" href="#galeri">Kapat ✕</a><img src="images/g-4.jpg" alt=""></div>
+      <div id="g5" class="modal"><a class="close" href="#galeri">Kapat ✕</a><img src="images/g-5.jpg" alt=""></div>
+      <div id="g6" class="modal"><a class="close" href="#galeri">Kapat ✕</a><img src="images/g-6.jpg" alt=""></div>
+      <div id="g7" class="modal"><a class="close" href="#galeri">Kapat ✕</a><img src="images/g-7.jpg" alt=""></div>
+      <div id="g8" class="modal"><a class="close" href="#galeri">Kapat ✕</a><img src="images/g-8.jpg" alt=""></div>
+      <div id="g9" class="modal"><a class="close" href="#galeri">Kapat ✕</a><img src="images/g-9.jpg" alt=""></div>
+      <div id="g10" class="modal"><a class="close" href="#galeri">Kapat ✕</a><img src="images/g-10.jpg" alt=""></div>
+      <div id="g11" class="modal"><a class="close" href="#galeri">Kapat ✕</a><img src="images/g-11.jpg" alt=""></div>
+      <div id="g12" class="modal"><a class="close" href="#galeri">Kapat ✕</a><img src="images/g-12.jpg" alt=""></div>
+    </div>
+  </section>
+
+  <!-- MEKTUP / NOT -->
+  <section id="mektup">
+    <div class="wrap">
+      <h2 class="h2">Sana Mektubum</h2>
+      <div class="letter">
+        <p class="script">Sevgilim,</p>
+        <p class="just">Bu satırları yazarken koskoca iki yılın birikmiş sıcaklığı var içimde. Bana sabırla, sevgiyle, kahkahayla eşlik ettiğin her gün için teşekkür ederim hayatımın anlamı.
+           Yol uzun, gökyüzü geniş; ama ben en çok senin yanındayken huzurluyum. 
+            Bu yaşının başlangıcında belki fiziksel olarak yanında değilim ama her zaman seninleyim. Sen benim bu dünyada sahip olabileceğim en güzel şeysin. Sevmeye doyamadığımsın. Gözlerine baktıkça kaybolduğum, aşkından eriyip bittiğimsin.<br>
+            Hayatımın en güzel günlerini bana yaşatan, en büyük şükür sebebim, canımın canı, biriciğim, sen... Tribünde ilk yanında oturduğum günü hatırlıyor musun? Nasıl da heyecanlıydım ve titriyordum. Şu an bunu yazarken de aynıyım.
+            Seni sevmek dünyanın en heyecanlı ve en güzel duygusu. Dönüp bakınca "ne çok yaşanmışlık var" diyorum ama sonra düşününce bu yaşanmışlıkları değerli yapanın sen olduğunu anlıyorum.
+            Koşmalar, sarılmalar, öpmeler, gülmeler, huzur ama her zaman iyi anlarımız olmadı yeri geldi uzak kaldık yeri geldi ağladık bazen çok sinirlendik ama sen yanımdayken ben bir kez bile huzursuz olmadım.
+            Her ne olursa olsun senin olduğun her yer bana hep huzurlu hissettirdi. Kötü bile olsam senin omzunda senin yanında ağlamak hep en büyük konforum oldu. <br> 
+            <br>
+            Beraber parasız kaldık, ders çalıştık, yolculuklar yaptık, deli gibi yemek yedik, filmler izledik, beraber uyuduk, cenazemiz de oldu düğünümüz de, hastaneye de birlikte gittik mahkemeye de.
+            Bakıldığında bunlar belki de evli insanların bile yapmadığı sıradan ama çok değerli şeyler. Her şeyin farkındayım sevgilim. Benim için, bizim için yaptığın her şeyin yanımda olduğun her anın farkındayım. 
+            Hiçbirini asla unutmam çünkü sen benim bu hayatta en değer verdiğimsin ve bana yaşattığın her şey de çok özel. Tüm bunları neden anlattım? Tabii ki kaplumbağa deden. Şaka şaka. 
+            Sana karşı saygı minnet ve aşk doluyum. İçi boş iyikiler değil bunlar, dolu dolu iyikiler. Her söylediğimin bir sebebi var ve anlamalısın ki söylediklerim öylesine değil, bu gerçek bir aşk.
+            Tüm bunlar için sana teşekkür ederim canım sevgilim, eşim. Bana yaşattığın her şey için sonsuz kez teşekkürler. Sadece güzel olanlar için değil yaşadığımız ve bizi olgunlaştıran kötü şeyler için de teşekkürler.
+            Seninle yaşadığıma pişman olduğum hiçbir anımız yok. Kavgalarımızdan bile vazgeçmem, başka biriyle gülmeye değişmem.
+            Sen benim bu hayatta vazgeçmeyeceğim tek şeysin. <br>
+            <br>
+            Sen benim bu hayattaki tek doğrum ve en büyük iyikimsin. Kelimelerle tarif edilemeyecek kadar büyük bir aşkın muhatabısın.
+            Bu 2 yıl bile böyle dolu ve mutlu geçtiyse bundan sonra birlikte geçireceğimiz onlarca yıl nasıl güzel geçer kim bilir? Seninle her şey çok güzel sevgilim. Sen benim en özelimsin. Sakın yanında olamıyorum diye üzülme, elini kalbine götür ben hep ordayım. <br>
+            Güzel kalbin hep beni sevsin, hayat seni hep mutluluklarla şaşırtsın ve başarılarınla dolup taşsın. Aldığın her yaş benim yanımda başlasın ve bitsin. O öpmeye kıyamadığım gözlerinden yaş süzülmesin.
+            Kalbinin yorulmadığı ben dolu uzun bir ömrün olsun.Yıllar bizi beraber yaşlandırsın sevgilim.
+            İyi ki doğmuşsun ve iyi ki benim olmuşsun bebeğimm. Doğum günün kutlu olsun sonsuzluğum, diğer yarım, kalbimin tek sahibi...
+            Nice yaşların olsun, birlikte…</p>
+        <p class="just">Hep senin, Çuççulun💖</p>
+      </div>
+
+      <h3 class="h2" style="margin-top:28px;font-size:26px">Seni Sevmemin 10 Sebebi</h3>
+      <div class="reasons">
+        <div class="reason">Hayatımda gördüğüm en güzel mavi tonuna sahip gözlerinin içindeki o sıcaklık.</div>
+        <div class="reason">Yanında hissettiğim güven ve huzur.</div>
+        <div class="reason">Birlikte gülüşümüzün, kahkahalarımızın sesi.</div>
+        <div class="reason">Geleceğimizi inşa etme çaban.</div>
+        <div class="reason">Beni her zaman anlayıp her koşulda iyi hissettirmen.</div>
+        <div class="reason">Her anı özel kılman.</div>
+        <div class="reason">Sana sarıldığımda içime dolan aidiyet hissi.</div>
+        <div class="reason">Düşlerime ortak olman.</div>
+        <div class="reason">Her koşulda arkamda durman.</div>
+        <div class="reason">Her zaman "iyi ki" dememin sebebi olman.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANI SAYACI -->
+  <section id="sayac">
+    <div class="wrap">
+      <h2 class="h2">Beraber anılarla dolu musmutlu geçirdiğimiz süre ❤️</h2>
+      <p class="lead">01.01.2024'den beri geçen zaman </p>
+      <div id="counter" style="margin-top:20px;font-size:22px;color:var(--accent);font-weight:600"></div>
+    </div>
+  </section>
+
+<footer>
+    <div class="wrap">
+      <div>© <span id="yil">2025</span> — Nazlı’dan <span style="color:var(--primary)">Biricik Aşkına</span> ❤️</div>
+      <div style="margin-top:8px;font-size:13px"></div>
+    </div>
+  </footer>
+
+  <script>
+    // yıl güncelle
+    document.getElementById('yil').textContent = new Date().getFullYear();
+    // anı sayacı
+    const startDate = new Date("2024-01-01T00:00:00");
+    function updateCounter(){
+      const now = new Date();
+      const diff = now - startDate;
+
+      const days = Math.floor(diff / (1000*60*60*24));
+      const hours = Math.floor((diff / (1000*60*60)) % 24);
+      const minutes = Math.floor((diff / (1000*60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('counter').textContent = `${days} gün ${hours} saat ${minutes} dakika ${seconds} saniye`;
+    }
+    setInterval(updateCounter, 1000);
+    updateCounter();
+  </script>
+</body>
+</html>              
